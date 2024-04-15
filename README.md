@@ -4,11 +4,11 @@
 
 ##TODO
 
-- [ ] Deploy
-- [ ] basic ui
+- [x] Deploy
+- [x] basic ui
 - [ ] Set up db
 - [ ] attach db to ui
-- [ ] auth
+- [x] auth
 - [ ] image upload
 - [ ] error management
 - [ ] routing
