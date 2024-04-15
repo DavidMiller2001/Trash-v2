@@ -15,7 +15,7 @@ function Post(props: { post: z.infer<typeof insertPostSchema> }) {
     <div>
       <h2>{post.text}</h2>
       {post.imageUrl !== "" ? (
-        <img className="w-48" src={post.imageUrl || ""} />
+        <img className="w-48" src={post.imageUrl ?? ""} />
       ) : (
         <></>
       )}
@@ -30,7 +30,7 @@ export default async function HomePage() {
     <main className="">
       <div className="flex flex-wrap gap-4">
         {posts.map((post) => {
-          return <Post post={post} />;
+          return <Post key={post.id} post={post} />;
         })}
       </div>
     </main>
