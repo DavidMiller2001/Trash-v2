@@ -3,10 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormField, FormItem } from "./ui/form";
-import { Textarea } from "./ui/textarea";
-import { Heart, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { Form, FormField, FormItem } from "./form";
+import { Textarea } from "./textarea";
 
 const formSchema = z.object({
   text: z.string().max(280),
@@ -15,23 +13,6 @@ const formSchema = z.object({
 
 function onSubmit(values: z.infer<typeof formSchema>) {
   // Handle form shenanigans
-}
-
-function LikeButton() {
-  const [liked, setLiked] = useState(false);
-  return (
-    <button onClick={() => setLiked((prev) => !prev)}>
-      <Heart fill={liked ? "#fff" : "transparent"} />
-    </button>
-  );
-}
-
-function CommentButton() {
-  return (
-    <button>
-      <MessageCircle />
-    </button>
-  );
 }
 
 export default function PostForm() {
@@ -61,16 +42,7 @@ export default function PostForm() {
           />
         </form>
       </Form>
-      <div className="bg-slate-500">
-        <ul className="flex items-center px-4 py-2">
-          <li className="flex items-center">
-            <LikeButton />
-          </li>
-          <li>
-            <CommentButton />
-          </li>
-        </ul>
-      </div>
+      <div className="bg-slate-500"></div>
     </>
   );
 }

@@ -4,8 +4,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 import { Button } from "./button";
 import { useState } from "react";
-import { Separator } from "~/components/ui/separator";
-import PostForm from "../PostForm";
+import PostForm from "./PostForm";
 
 export default function Nav() {
   const [postFormOpen, setPostFormOpen] = useState(false);
