@@ -5,6 +5,7 @@ import { Plus } from "lucide-react";
 import { Button } from "./button";
 import { useState } from "react";
 import { Separator } from "~/components/ui/separator";
+import PostForm from "../PostForm";
 
 export default function Nav() {
   const [postFormOpen, setPostFormOpen] = useState(false);
@@ -41,9 +42,10 @@ export default function Nav() {
       </nav>
 
       {postFormOpen && (
-        <div>
-          <Separator className="mb-4" />
-          <div>hello</div>
+        <div className="flex">
+          <div className="flex-1">
+            <PostForm />
+          </div>
         </div>
       )}
     </>
