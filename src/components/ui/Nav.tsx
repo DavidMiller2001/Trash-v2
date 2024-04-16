@@ -13,7 +13,7 @@ export default function Nav() {
     return (
       <Button
         variant={"ghost"}
-        className="w-12 p-0"
+        size="icon"
         onClick={() => {
           setPostFormOpen((prev) => !prev);
         }}
@@ -43,7 +43,7 @@ export default function Nav() {
       {postFormOpen && (
         <div className="flex">
           <div className="flex-1">
-            <PostForm />
+            <PostForm setPostFormOpen={setPostFormOpen} />
           </div>
         </div>
       )}
