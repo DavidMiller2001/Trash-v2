@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form, FormField, FormItem } from "./ui/form";
 import { Textarea } from "./ui/textarea";
-import { Heart } from "lucide-react";
+import { Heart, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 const formSchema = z.object({
@@ -22,6 +22,14 @@ function LikeButton() {
   return (
     <button onClick={() => setLiked((prev) => !prev)}>
       <Heart fill={liked ? "#fff" : "transparent"} />
+    </button>
+  );
+}
+
+function CommentButton() {
+  return (
+    <button>
+      <MessageCircle />
     </button>
   );
 }
@@ -57,6 +65,9 @@ export default function PostForm() {
         <ul className="flex items-center px-4 py-2">
           <li className="flex items-center">
             <LikeButton />
+          </li>
+          <li>
+            <CommentButton />
           </li>
         </ul>
       </div>
