@@ -29,11 +29,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`flex justify-center font-sans ${inter.variable}`}>
-          <div className="w-full max-w-7xl">
+        <body
+          className={`flex flex-col justify-center font-sans ${inter.variable}`}
+        >
+          <div className="m-auto w-full max-w-3xl border border-slate-200">
             <Nav />
-            <Separator className="mb-4 opacity-50" />
-            {children}
+            <Separator className="mb-4" />
+            <div className="p-4">{children}</div>
           </div>
         </body>
       </html>
