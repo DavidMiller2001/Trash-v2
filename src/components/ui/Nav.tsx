@@ -40,13 +40,7 @@ export default function Nav() {
         </div>
       </nav>
 
-      {postFormOpen && (
-        <div className="flex">
-          <div className="flex-1">
-            <PostForm setPostFormOpen={setPostFormOpen} />
-          </div>
-        </div>
-      )}
+      {postFormOpen && <PostForm setPostFormOpen={setPostFormOpen} />}
     </>
   );
 }
