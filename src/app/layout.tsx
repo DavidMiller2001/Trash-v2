@@ -1,13 +1,7 @@
 import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
-import { Separator } from "~/components/ui/separator";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import Nav from "~/components/ui/Nav";
 
 const inter = Inter({
@@ -34,7 +28,6 @@ export default function RootLayout({
         >
           <div className="m-auto w-full max-w-3xl border border-slate-200">
             <Nav />
-            <Separator className="mb-4" />
             <div className="p-4">{children}</div>
           </div>
         </body>

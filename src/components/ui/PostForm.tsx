@@ -3,11 +3,11 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./form";
+import { Form, FormControl, FormField, FormItem } from "./form";
 import { Button } from "./button";
 import { Textarea } from "./textarea";
 import { Image, SendHorizontal } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { useUser } from "@clerk/nextjs";
 import { uploadPost } from "~/server/utils/drizzleFunctions";
 import { useRouter } from "next/navigation";
@@ -35,7 +35,7 @@ export default function PostForm(props: {
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!user || !user.id) {
+    if (!user?.id) {
       throw new Error("Unauthorized!");
     }
 

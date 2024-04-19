@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { db } from "~/server/db";
-import { insertPostSchema } from "~/server/db/schema";
+import type { insertPostSchema } from "~/server/db/schema";
 
 const mockUrls = [
   "https://utfs.io/f/ece8a4a8-59d1-4e8b-8403-99fc0f6c07fd-er7zyk.png",
@@ -15,7 +15,7 @@ function Post(props: { post: z.infer<typeof insertPostSchema> }) {
     <div>
       <h2>{post.text}</h2>
       {post.imageUrl !== "" ? (
-        <img className="w-48" src={post.imageUrl ?? ""} />
+        <img className="w-48" src={post.imageUrl ?? ""} alt="" />
       ) : (
         <></>
       )}
