@@ -45,9 +45,8 @@ export const usersRelations = relations(users, ({ many }) => ({
 
 export const posts = createTable("post", {
   id: serial("id").primaryKey(),
-  authorId: varchar("author_id")
-    .notNull()
-    .references(() => users.id),
+  authorId: varchar("author_id").notNull(),
+  // .references(() => users.id),
   text: varchar("text", { length: 280 }),
   imageUrl: varchar("image_url"),
   createdAt: timestamp("created_at")

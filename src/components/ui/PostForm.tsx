@@ -8,6 +8,9 @@ import { Button } from "./button";
 import { Textarea } from "./textarea";
 import { Image, SendHorizontal } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
+import { useUser } from "@clerk/nextjs";
+import { uploadPost } from "~/server/utils/drizzleFunctions";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   text: z
@@ -28,8 +31,22 @@ export default function PostForm(props: {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  const { user } = useUser();
+  const router = useRouter();
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!user || !user.id) {
+      throw new Error("Unauthorized!");
+    }
+
+    const postData = {
+      authorId: user.id,
+      text: values.text,
+      imageUrl: values.imageUrl,
+    };
+
+    await uploadPost(postData);
+    router.refresh();
   }
 
   return (
