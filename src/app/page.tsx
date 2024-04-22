@@ -1,6 +1,6 @@
 import { z } from "zod";
+import PostView from "~/components/ui/PostView";
 import { db } from "~/server/db";
-import type { insertPostSchema } from "~/server/db/schema";
 
 const mockUrls = [
   "https://utfs.io/f/ece8a4a8-59d1-4e8b-8403-99fc0f6c07fd-er7zyk.png",
@@ -9,20 +9,6 @@ const mockUrls = [
 
 export const dynamic = "force-dynamic";
 
-function Post(props: { post: z.infer<typeof insertPostSchema> }) {
-  const { post } = props;
-  return (
-    <div>
-      <h2>{post.text}</h2>
-      {post.imageUrl !== "" ? (
-        <img className="w-48" src={post.imageUrl ?? ""} alt="" />
-      ) : (
-        <></>
-      )}
-    </div>
-  );
-}
-
 export default async function HomePage() {
   const posts = await db.query.posts.findMany();
 
@@ -30,7 +16,7 @@ export default async function HomePage() {
     <main className="">
       <div className="flex flex-wrap gap-4">
         {posts.map((post) => {
-          return <Post key={post.id} post={post} />;
+          return <PostView key={post.id} post={post} />;
         })}
       </div>
     </main>

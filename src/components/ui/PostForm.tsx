@@ -46,6 +46,7 @@ export default function PostForm(props: {
     };
 
     await uploadPost(postData);
+    props.setPostFormOpen(false);
     router.refresh();
   }
 

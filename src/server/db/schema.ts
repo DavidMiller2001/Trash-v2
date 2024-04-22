@@ -10,7 +10,6 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -45,8 +44,9 @@ export const usersRelations = relations(users, ({ many }) => ({
 
 export const posts = createTable("post", {
   id: serial("id").primaryKey(),
-  authorId: varchar("author_id").notNull(),
-  // .references(() => users.id),
+  authorId: varchar("author_id")
+    .notNull()
+    .references(() => users.id),
   text: varchar("text", { length: 280 }),
   imageUrl: varchar("image_url"),
   createdAt: timestamp("created_at")
@@ -55,11 +55,9 @@ export const posts = createTable("post", {
   updatedAt: timestamp("updatedAt"),
 });
 
-export const postsRelations = relations(posts, ({ one }) => ({
-  author: one(users, {
-    fields: [posts.authorId],
-    references: [users.id],
-  }),
-}));
-
-export const insertPostSchema = createInsertSchema(posts);
+// export const postsRelations = relations(posts, ({ one }) => ({
+//   author: one(users, {
+//     fields: [posts.authorId],
+//     references: [users.id],
+//   }),
+// }));
