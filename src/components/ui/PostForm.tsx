@@ -66,7 +66,6 @@ export default function PostForm(props: {
                     placeholder="Say something!"
                   />
                 </FormControl>
-                {/* <FormMessage /> */}
               </FormItem>
             );
           }}

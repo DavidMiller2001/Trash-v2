@@ -36,6 +36,8 @@ export const createTable = pgTableCreator((name) => `trashv2_${name}`);
 
 export const users = createTable("users", {
   id: varchar("id").primaryKey(),
+  username: varchar("username").notNull(),
+  imageUrl: varchar("image_url"),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
