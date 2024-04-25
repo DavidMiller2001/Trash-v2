@@ -8,7 +8,7 @@ export default async function HomePage() {
 
   return (
     <main className="">
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-col gap-4">
         {posts.map((post) => {
           return <PostView key={post.id} post={post} />;
         })}

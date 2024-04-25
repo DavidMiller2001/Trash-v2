@@ -19,7 +19,7 @@ export async function uploadPost(post: z.infer<typeof postSchema>) {
     throw new Error("Unauthorized!");
   }
 
-  const { id: userId, username, imageUrl } = currUser;
+  const { id: userId, username, imageUrl, firstName, lastName } = currUser;
 
   const user = await db.query.users.findFirst({
     where: (users, { eq }) => eq(users.id, userId),
@@ -28,8 +28,21 @@ export async function uploadPost(post: z.infer<typeof postSchema>) {
   if (!user) {
     await db
       .insert(users)
-      .values({ id: userId, username: username ?? "", imageUrl: imageUrl });
+      .values({
+        id: userId,
+        username: username ?? "",
+        imageUrl: imageUrl,
+        fullName: `${firstName} ${lastName}`,
+      });
   }
 
   await db.insert(posts).values(post);
+}
+
+export async function getUser(id: string) {
+  const user = await db.query.users.findFirst({
+    where: (users, { eq }) => eq(users.id, id),
+  });
+
+  return user;
 }

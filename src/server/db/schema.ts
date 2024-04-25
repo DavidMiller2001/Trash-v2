@@ -37,6 +37,7 @@ export const createTable = pgTableCreator((name) => `trashv2_${name}`);
 export const users = createTable("users", {
   id: varchar("id").primaryKey(),
   username: varchar("username").notNull(),
+  fullName: varchar("full_name"),
   imageUrl: varchar("image_url"),
 });
 
