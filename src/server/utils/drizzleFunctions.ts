@@ -26,14 +26,12 @@ export async function uploadPost(post: z.infer<typeof postSchema>) {
   });
 
   if (!user) {
-    await db
-      .insert(users)
-      .values({
-        id: userId,
-        username: username ?? "",
-        imageUrl: imageUrl,
-        fullName: `${firstName} ${lastName}`,
-      });
+    await db.insert(users).values({
+      id: userId,
+      username: username ?? "",
+      imageUrl: imageUrl,
+      fullName: `${firstName} ${lastName}`,
+    });
   }
 
   await db.insert(posts).values(post);
