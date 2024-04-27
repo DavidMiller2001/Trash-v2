@@ -8,21 +8,38 @@ export default function PostView(props: {
 }
 
 function timeSinceUpload(uploadDate: Date) {
-  const now = new Date();
+  const timeUnits = [
+    "day",
+    "days",
+    "hour",
+    "hours",
+    "minute",
+    "minutes",
+  ] as const;
+  type timeUnitType = (typeof timeUnits)[number];
 
+  const now = new Date();
   const diff = now.getTime() - uploadDate.getTime();
 
-  const diffSeconds = diff / 1000;
-  const diffMinutes = diffSeconds / 60;
-  const diffHours = diffMinutes / 60;
+  // time since in minutes
+  let outputValue = diff / 1000 / 60;
+  let outputUnit: timeUnitType = "minutes";
 
-  let output: number;
+  if (outputValue <= 1) {
+    outputUnit = "minute";
+    // time since in hours
+  } else if (outputValue >= 60) {
+    outputValue /= 60;
+    outputUnit = outputValue < 2 ? "hour" : "hours";
 
-  if (diffHours < 1) {
-    return `${Math.floor(diffMinutes)} minutes ago`;
+    // time since in days
+    if (outputValue >= 24) {
+      outputValue /= 24;
+      outputUnit = outputValue < 2 ? "day" : "days";
+    }
   }
 
-  return `${Math.floor(diffHours)} hours ago`;
+  return `${Math.floor(outputValue)} ${outputUnit} ago`;
 }
 
 /**
