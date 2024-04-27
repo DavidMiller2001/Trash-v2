@@ -41,9 +41,9 @@ export const users = createTable("users", {
   imageUrl: varchar("image_url"),
 });
 
-export const usersRelations = relations(users, ({ many }) => ({
-  posts: many(posts),
-}));
+// export const usersRelations = relations(users, ({ many }) => ({
+//   posts: many(posts),
+// }));
 
 export const posts = createTable("post", {
   id: serial("id").primaryKey(),

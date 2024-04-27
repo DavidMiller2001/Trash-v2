@@ -27,6 +27,7 @@ function timeSinceUpload(uploadDate: Date) {
 
   if (outputValue <= 1) {
     outputUnit = "minute";
+
     // time since in hours
   } else if (outputValue >= 60) {
     outputValue /= 60;
@@ -97,6 +98,9 @@ export async function PostViewV0(props: {
           </div>
         </div>
       </div>
+
+      <img src={post.imageUrl ?? ""} alt="" className="max-h-48 rounded" />
+
       <div className="p-4">
         <p className="text-gray-700 dark:text-gray-300">{post.text}</p>
         <div className="mt-4 flex items-center gap-2">

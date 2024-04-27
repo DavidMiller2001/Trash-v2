@@ -7,10 +7,11 @@ import { Form, FormControl, FormField, FormItem } from "./form";
 import { Button } from "./button";
 import { Textarea } from "./textarea";
 import { Image, SendHorizontal } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { useUser } from "@clerk/nextjs";
 import { uploadPost } from "~/server/utils/drizzleFunctions";
 import { useRouter } from "next/navigation";
+import { UploadButton } from "~/utils/uploadthing";
 
 const formSchema = z.object({
   text: z
@@ -42,13 +43,15 @@ export default function PostForm(props: {
     const postData = {
       authorId: user.id,
       text: values.text,
-      imageUrl: values.imageUrl,
+      imageUrl: img,
     };
 
     await uploadPost(postData);
     props.setPostFormOpen(false);
     router.refresh();
   }
+
+  const [img, setImg] = useState("");
 
   return (
     <Form {...form}>
@@ -71,6 +74,10 @@ export default function PostForm(props: {
           }}
         />
 
+        {img !== "" && (
+          <img src={img} alt="" className="max-h-[500px] rounded" />
+        )}
+
         <ul className="absolute bottom-4 right-4 flex gap-2">
           <li>
             <Button
@@ -91,6 +98,18 @@ export default function PostForm(props: {
             <Button type="submit" variant="ghost" size="icon">
               <SendHorizontal />
             </Button>
+          </li>
+          <li>
+            <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(files) => {
+                const file = files[0];
+
+                if (file) {
+                  setImg(file.url);
+                }
+              }}
+            />
           </li>
         </ul>
       </form>
