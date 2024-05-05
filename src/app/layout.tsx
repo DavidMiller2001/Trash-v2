@@ -1,5 +1,4 @@
 import "~/styles/globals.css";
-// import "@uploadthing/react/styles.css";
 
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 

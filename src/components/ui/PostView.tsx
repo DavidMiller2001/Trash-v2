@@ -1,5 +1,6 @@
 import { InferSelectModel } from "drizzle-orm";
 import { posts } from "~/server/db/schema";
+import Link from 'next/link';
 
 export default function PostView(props: {
   post: InferSelectModel<typeof posts>;
@@ -78,7 +79,7 @@ export async function PostViewV0(props: {
   }
 
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-900">
+    <div className="text-black overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-900">
       <div className="flex items-center gap-4 p-4">
         <Avatar className="h-10 w-10">
           <AvatarImage alt="@shadcn" src={user.imageUrl ?? ""} />
@@ -99,7 +100,13 @@ export async function PostViewV0(props: {
         </div>
       </div>
 
-      <img src={post.imageUrl ?? ""} alt="" className="max-h-48 rounded" />
+      <Link className='text-black' href={`/posts/${post.id}`}>Post Page</Link>
+
+      <img
+        src={post.imageUrl ?? ""}
+        alt=""
+        className="m-auto w-[300px] rounded-xl"
+      />
 
       <div className="p-4">
         <p className="text-gray-700 dark:text-gray-300">{post.text}</p>
